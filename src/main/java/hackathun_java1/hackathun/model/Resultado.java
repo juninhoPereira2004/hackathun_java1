@@ -18,7 +18,7 @@ public class Resultado {
     private Long id;
 
     @ManyToOne
-    private Usuario aluno;
+    private User aluno;
 
     @ManyToOne
     private Prova prova;

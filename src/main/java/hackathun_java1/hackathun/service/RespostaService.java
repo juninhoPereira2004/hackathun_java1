@@ -4,10 +4,10 @@ import hackathun_java1.hackathun.controller.RespostaController;
 import hackathun_java1.hackathun.model.Prova;
 import hackathun_java1.hackathun.model.Questao;
 import hackathun_java1.hackathun.model.RespostaAluno;
-import hackathun_java1.hackathun.model.Usuario;
+import hackathun_java1.hackathun.model.User;
 import hackathun_java1.hackathun.repository.ProvaRepository;
 import hackathun_java1.hackathun.repository.RespostaAlunoRepository;
-import hackathun_java1.hackathun.repository.UsuarioRepository;
+import hackathun_java1.hackathun.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -18,11 +18,11 @@ public class RespostaService {
 
     private final RespostaAlunoRepository respostaAlunoRepository;
     private final ProvaRepository provaRepository;
-    private final UsuarioRepository usuarioRepository;
+    private final UserRepository usuarioRepository;
 
     public RespostaService(RespostaAlunoRepository respostaAlunoRepository,
                            ProvaRepository provaRepository,
-                           UsuarioRepository usuarioRepository) {
+                           UserRepository usuarioRepository) {
         this.respostaAlunoRepository = respostaAlunoRepository;
         this.provaRepository = provaRepository;
         this.usuarioRepository = usuarioRepository;
@@ -31,7 +31,7 @@ public class RespostaService {
     public RespostaController.ResultadoProcessamento processarRespostas(RespostaController.RespostaImportacao importacao) {
         Prova prova = provaRepository.findById(importacao.idProva)
                 .orElseThrow(() -> new RuntimeException("Prova não encontrada"));
-        Usuario aluno = usuarioRepository.findById(importacao.idAluno)
+        User aluno = usuarioRepository.findById(importacao.idAluno)
                 .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
 
         List<Questao> questoesOrdenadas = prova.getQuestoes().stream()

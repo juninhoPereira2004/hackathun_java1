@@ -18,7 +18,7 @@ public class RespostaAluno {
     private Long id;
 
     @ManyToOne
-    private Usuario aluno;
+    private User aluno;
 
     @ManyToOne
     private Questao questao;

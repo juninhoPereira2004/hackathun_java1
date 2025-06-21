@@ -1,46 +1,47 @@
 package hackathun_java1.hackathun.controller;
 
+
 import hackathun_java1.hackathun.model.Turma;
 import hackathun_java1.hackathun.service.TurmaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Set;
-
-@RestController
-@RequestMapping("/turmas")
+@Controller
+@RequestMapping("/turma")
 public class TurmaController {
 
-    @Autowired
-    private TurmaService turmaService;
+    private final TurmaService service;
+    public TurmaController(TurmaService service) { this.service = service; }
 
     @GetMapping
-    public List<Turma> listarTurmas() {
-        return turmaService.listar();
+    public String listar(Model model) {
+        model.addAttribute("turma", service.listar());
+        return "turma/list";  // renderiza turma/list.html
     }
 
-    @PostMapping
-    public Turma criarTurma(@RequestBody Turma turma) {
-        return turmaService.criar(turma);
+    @GetMapping("/novo")
+    public String novoForm(Model model) {
+        model.addAttribute("turma", new Turma());
+        return "turma/form";
     }
 
-    @PutMapping("/{id}")
-    public Turma atualizarTurma(@PathVariable Long id, @RequestBody Turma turma) {
-        Turma existente = turmaService.buscarPorId(id)
-                .orElseThrow(() -> new RuntimeException("Turma não encontrada"));
-        existente.setNome(turma.getNome());
-        existente.setProfessor(turma.getProfessor());
-        return turmaService.criar(existente);
+    @PostMapping("/salvar")
+    public String salvar(@ModelAttribute Turma turma) {
+        service.salvar(turma);
+        return "redirect:/turmas";
     }
 
-    @DeleteMapping("/{id}")
-    public void deletarTurma(@PathVariable Long id) {
-        turmaService.excluir(id);
+    @GetMapping("/editar/{id}")
+    public String editarForm(@PathVariable Long id, Model model) {
+        Turma t = service.buscarPorId(id).orElseThrow();
+        model.addAttribute("turma", t);
+        return "turma/form";
     }
 
-    @PostMapping("/{id}/alunos")
-    public Turma associarAlunos(@PathVariable Long id, @RequestBody Set<Long> idsAlunos) {
-        return turmaService.associarAlunos(id, idsAlunos);
+    @GetMapping("/excluir/{id}")
+    public String excluir(@PathVariable Long id) {
+        service.excluir(id);
+        return "redirect:/turmas";
     }
 }

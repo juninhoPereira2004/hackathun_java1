@@ -45,6 +45,4 @@ public class QuestaoController {
         questaoService.deletarQuestao(id);
         return ResponseEntity.noContent().build();
     }
-
-    // implementar PUT para atualizar se desejar
 }

@@ -25,7 +25,7 @@ public class UsuarioDetailsService implements UserDetailsService {
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + email));
 
-        String role = "ROLE_" + usuario.getPerfil().name(); // Spring Security exige prefixo ROLE_
+        String role = "ROLE_" + usuario.getPerfil().name();
 
         return new User(usuario.getEmail(), usuario.getSenha(), Collections.singletonList(new SimpleGrantedAuthority(role)));
     }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container mt-5">
+    <h2 class="mb-4">📊 Resultados de <span th:text="${aluno.nome}">João Espolador</span></h2>
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-light">
+        <tr>
+            <th>Prova</th>
+            <th>Turma</th>
+            <th>Disciplina</th>
+            <th>Nota</th>
+            <th>Data</th>
+            <th class="text-center">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="resultado : ${resultados}">
+            <td th:text="${resultado.prova.descricao}">Prova 1</td>
+            <td th:text="${resultado.prova.turma.nome}">Turma A</td>
+            <td th:text="${resultado.prova.disciplina.nome}">Matemática</td>
+            <td th:text="${resultado.nota}">9.0</td>
+            <td th:text="${#dates.format(resultado.prova.data, 'dd/MM/yyyy')}">22/06/2025</td>
+            <td class="text-center">
+                <a th:href="@{'/professor/gabaritos/' + ${resultado.id}}" class="btn btn-sm btn-outline-info">Ver Gabarito</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="text-end mt-3">
+        <a href="/professor/turmas" class="btn btn-outline-primary">Voltar às Turmas</a>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

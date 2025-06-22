@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container mt-5">
+    <h2 class="mb-4">📊 Meus Resultados</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow-sm">
+            <thead class="table-light">
+            <tr>
+                <th>Prova</th>
+                <th>Turma</th>
+                <th>Disciplina</th>
+                <th>Nota</th>
+                <th>Data</th>
+                <th class="text-center">Detalhes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="resultado : ${resultados}">
+                <td th:text="${resultado.prova.descricao}">Prova 1</td>
+                <td th:text="${resultado.prova.turma.nome}">Turma A</td>
+                <td th:text="${resultado.prova.disciplina.nome}">História</td>
+                <td th:text="${resultado.nota}">8.5</td>
+                <td th:text="${#dates.format(resultado.prova.data, 'dd/MM/yyyy')}">22/06/2025</td>
+                <td class="text-center">
+                    <a th:href="@{'/aluno/gabarito/' + ${resultado.id}}" class="btn btn-sm btn-outline-info">Ver Gabarito</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

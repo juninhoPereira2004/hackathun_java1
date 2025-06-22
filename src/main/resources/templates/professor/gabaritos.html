@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container mt-5">
+    <h2 class="mb-4">📄 Gabaritos Corrigidos</h2>
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-light">
+        <tr>
+            <th>Aluno</th>
+            <th>Turma</th>
+            <th>Disciplina</th>
+            <th>Nota</th>
+            <th>Data</th>
+            <th class="text-center">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="gabarito : ${gabaritos}">
+            <td th:text="${gabarito.aluno.nome}">João Silva</td>
+            <td th:text="${gabarito.prova.turma.nome}">Turma A</td>
+            <td th:text="${gabarito.prova.disciplina.nome}">Português</td>
+            <td th:text="${gabarito.nota}">8.5</td>
+            <td th:text="${#dates.format(gabarito.dataCorrecao, 'dd/MM/yyyy')}">21/06/2025</td>
+            <td class="text-center">
+                <a th:href="@{'/professor/gabaritos/' + ${gabarito.id}}" class="btn btn-sm btn-outline-primary">Detalhes</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

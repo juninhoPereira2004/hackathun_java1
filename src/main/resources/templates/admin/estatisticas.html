@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container mt-5">
+    <h2 class="mb-4">📊 Estatísticas do Sistema</h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-primary text-center p-4">
+                <h5 class="card-title">Usuários Cadastrados</h5>
+                <p class="display-6 text-primary" th:text="${totalUsuarios}">0</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-success text-center p-4">
+                <h5 class="card-title">Provas Criadas</h5>
+                <p class="display-6 text-success" th:text="${totalProvas}">0</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-warning text-center p-4">
+                <h5 class="card-title">Média Geral de Acertos</h5>
+                <p class="display-6 text-warning" th:text="${mediaAcertos} + '%'">0%</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-end mt-4">
+        <a href="/admin/home" class="btn btn-outline-secondary">Voltar</a>
+        <a href="/admin/estatisticas/exportar" class="btn btn-outline-dark">📄 Exportar Relatório</a>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

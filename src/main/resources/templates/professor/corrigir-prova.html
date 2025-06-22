@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container mt-5">
+    <h2 class="mb-4">🧾 Corrigir Prova Manualmente</h2>
+
+    <form th:action="@{/professor/correcao/salvar}" method="post" class="bg-white p-4 rounded shadow-sm">
+        <input type="hidden" name="provaId" th:value="${prova.id}"/>
+
+        <div class="mb-3">
+            <label for="aluno" class="form-label">Aluno</label>
+            <select class="form-select" id="aluno" name="alunoId" required>
+                <option value="">Selecione o aluno</option>
+                <option th:each="aluno : ${alunos}" th:value="${aluno.id}" th:text="${aluno.nome}"></option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label">Respostas do Aluno</label>
+            <div th:each="questao, stat : ${prova.questoes}">
+                <div class="mb-2">
+                    <label th:text="'Questão ' + ${stat.index + 1} + ':'"></label>
+                    <select class="form-select" name="respostas" required>
+                        <option value="">Escolha a alternativa</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="/professor/provas" class="btn btn-outline-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-success">Corrigir e Salvar</button>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container mt-5">
+    <h2>📝 Criar Prova</h2>
+
+    <form th:action="@{/professor/provas/salvar}" th:object="${prova}" method="post" class="shadow p-4 rounded bg-white mt-4">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="mb-3">
+            <label for="turma" class="form-label">Turma</label>
+            <select class="form-select" id="turma" th:field="*{turma.id}" required>
+                <option value="">Selecione a turma</option>
+                <option th:each="turma : ${turmas}" th:value="${turma.id}" th:text="${turma.nome}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="disciplina" class="form-label">Disciplina</label>
+            <select class="form-select" id="disciplina" th:field="*{disciplina.id}" required>
+                <option value="">Selecione a disciplina</option>
+                <option th:each="disc : ${disciplinas}" th:value="${disc.id}" th:text="${disc.nome}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="data" class="form-label">Data da Prova</label>
+            <input type="date" class="form-control" id="data" th:field="*{data}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição</label>
+            <textarea class="form-control" id="descricao" rows="3" th:field="*{descricao}"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="/professor/home" class="btn btn-outline-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-success">Salvar Prova</button>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container mt-5">
+    <h2 class="mb-4">📋 Minhas Turmas</h2>
+
+    <table class="table table-striped table-hover shadow-sm">
+        <thead class="table-light">
+        <tr>
+            <th>Nome da Turma</th>
+            <th>Disciplina</th>
+            <th>Período</th>
+            <th class="text-center">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="turma : ${turmas}">
+            <td th:text="${turma.nome}">Turma A</td>
+            <td th:text="${turma.disciplina.nome}">Matemática</td>
+            <td th:text="${turma.periodo}">Noturno</td>
+            <td class="text-center">
+                <a th:href="@{'/professor/turmas/' + ${turma.id} + '/provas'}" class="btn btn-sm btn-outline-primary me-2">Ver Provas</a>
+                <a th:href="@{'/professor/turmas/' + ${turma.id} + '/alunos'}" class="btn btn-sm btn-outline-secondary">Ver Alunos</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

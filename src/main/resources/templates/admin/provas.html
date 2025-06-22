@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Provas Cadastradas</h2>
+        <a href="/admin/provas/nova" class="btn btn-primary">+ Nova Prova</a>
+    </div>
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-light">
+        <tr>
+            <th>Turma</th>
+            <th>Disciplina</th>
+            <th>Data</th>
+            <th class="text-center">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prova : ${provas}">
+            <td th:text="${prova.turma.nome}">Turma A</td>
+            <td th:text="${prova.disciplina.nome}">Matemática</td>
+            <td th:text="${#dates.format(prova.data, 'dd/MM/yyyy')}">20/06/2025</td>
+            <td class="text-center">
+                <a th:href="@{'/admin/provas/editar/' + ${prova.id}}" class="btn btn-sm btn-outline-secondary me-2">Editar</a>
+                <a th:href="@{'/admin/provas/excluir/' + ${prova.id}}" class="btn btn-sm btn-outline-danger">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

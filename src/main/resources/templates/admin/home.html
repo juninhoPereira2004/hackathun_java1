@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="welcome">Bem-vindo, Administrador!</h2>
+        <p class="text-muted">Este é o seu painel de controle do sistema CorrigeJÁ</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card border-primary shadow-sm text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Alunos</h5>
+                    <p class="card-text fs-3 text-primary">125</p> <!-- Substituir por variável dinâmica -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-success shadow-sm text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Professores</h5>
+                    <p class="card-text fs-3 text-success">15</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-warning shadow-sm text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Provas</h5>
+                    <p class="card-text fs-3 text-warning">32</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center gap-3">
+        <a href="/admin/usuarios" class="btn btn-outline-primary">Gerenciar Usuários</a>
+        <a href="/admin/provas" class="btn btn-outline-success">Gerenciar Provas</a>
+        <a href="/admin/estatisticas" class="btn btn-outline-dark">Ver Estatísticas</a>
+        <a href="/logout" class="btn btn-outline-danger">Sair</a>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

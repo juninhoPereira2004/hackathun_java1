@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container mt-5 fade-in">
+  <h2 class="mb-4 text-center header-text">Bem-vindo, Professor!</h2>
+
+  <div class="row g-4">
+
+    <div class="col-md-4">
+      <a th:href="@{/professor/turmas}" class="text-decoration-none text-dark">
+        <div class="card shadow text-center p-4">
+          <h5 class="card-title">📋 Minhas Turmas</h5>
+          <p class="card-text">Visualize e gerencie suas turmas.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a th:href="@{/professor/provas/criar}" class="text-decoration-none text-dark">
+        <div class="card shadow text-center p-4">
+          <h5 class="card-title">📝 Criar Prova</h5>
+          <p class="card-text">Monte novas avaliações para suas turmas.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a th:href="@{/professor/gabaritos}" class="text-decoration-none text-dark">
+        <div class="card shadow text-center p-4">
+          <h5 class="card-title">🧾 Gabaritos Corrigidos</h5>
+          <p class="card-text">Veja os resultados das correções.</p>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

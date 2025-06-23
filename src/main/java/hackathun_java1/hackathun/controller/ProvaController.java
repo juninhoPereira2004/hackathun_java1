@@ -3,11 +3,11 @@ package hackathun_java1.hackathun.controller;
 import hackathun_java1.hackathun.model.Prova;
 import hackathun_java1.hackathun.service.ProvaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
+@Controller
 @RequestMapping("/provas")
 public class ProvaController {
 
@@ -15,32 +15,20 @@ public class ProvaController {
     private ProvaService provaService;
 
     @GetMapping
-    public List<Prova> listarProvas() {
-        return provaService.listar();
+    public String listar(Model model) {
+        model.addAttribute("provas", provaService.listarTodas());
+        return "provas/list";
     }
 
-    @PostMapping
-    public Prova criarProva(@RequestBody Prova prova) {
-        return provaService.salvar(prova);
+    @GetMapping("/nova")
+    public String novaProva(Model model) {
+        model.addAttribute("prova", new Prova());
+        return "provas/form";
     }
 
-    @PutMapping("/{id}")
-    public Prova atualizarProva(@PathVariable Long id, @RequestBody Prova provaAtualizada) {
-        Prova provaExistente = provaService.buscarPorId(id)
-                .orElseThrow(() -> new RuntimeException("Prova não encontrada"));
-
-        provaExistente.setTitulo(provaAtualizada.getTitulo());
-        provaExistente.setData(provaAtualizada.getData());
-        provaExistente.setTurma(provaAtualizada.getTurma());
-        provaExistente.setDisciplina(provaAtualizada.getDisciplina());
-        provaExistente.setQuestoes(provaAtualizada.getQuestoes());
-
-        return provaService.salvar(provaExistente);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deletarProva(@PathVariable Long id) {
-        provaService.excluir(id);
+    @PostMapping("/salvar")
+    public String salvar(@ModelAttribute Prova prova) {
+        provaService.salvar(prova);
+        return "redirect:/provas";
     }
 }
-

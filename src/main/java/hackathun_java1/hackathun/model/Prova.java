@@ -1,35 +1,30 @@
 package hackathun_java1.hackathun.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Prova {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titulo;
+    private String nome;
 
-    private LocalDate data;
+    private String descricao;
+
+    private String data;
 
     @ManyToOne
-    private Turma turma;
-
-    @ManyToOne
+    @JoinColumn(name = "disciplina_id")
     private Disciplina disciplina;
 
-    @OneToMany(mappedBy = "prova", cascade = CascadeType.ALL)
-    private Set<Questao> questoes;
+
+    @OneToMany(mappedBy = "prova", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Questao> questoes = new ArrayList<>();
 }

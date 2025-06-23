@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/turma")
+@RequestMapping("/turmas")
 public class TurmaController {
 
     private final TurmaService service;

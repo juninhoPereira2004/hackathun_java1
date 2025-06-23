@@ -45,7 +45,7 @@ public class RespostaService {
             Questao questao = questoesOrdenadas.get(i);
             String respostaAluno = i < importacao.respostas.length ? importacao.respostas[i] : "";
 
-            boolean correta = respostaAluno.equalsIgnoreCase(questao.getRespostaCorreta());
+            boolean correta = respostaAluno.equalsIgnoreCase(questao.getAlternativaCorreta());
             if (correta) acertos++;
             else erros++;
 

@@ -1,23 +1,15 @@
 package hackathun_java1.hackathun.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Questao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private int numero;
 
     private String enunciado;
 
@@ -25,9 +17,13 @@ public class Questao {
     private String alternativaB;
     private String alternativaC;
     private String alternativaD;
+    private String alternativaE;
 
-    private String respostaCorreta;
+    private String alternativaCorreta;
+
+    private int numero; // posição da questão na prova
 
     @ManyToOne
+    @JoinColumn(name = "prova_id")
     private Prova prova;
 }

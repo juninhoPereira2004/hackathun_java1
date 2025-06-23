@@ -14,12 +14,15 @@ public class Aluno {
 
     private int idade;
 
+    private String ra;
+
     public Aluno() {}
 
-    public Aluno(Long id, String nome, int idade) {
+    public Aluno(Long id, String nome, int idade, String ra) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
+        this.ra = ra;
     }
 
     public Long getId() {
@@ -44,5 +47,13 @@ public class Aluno {
 
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    public String getRa() {
+        return ra;
+    }
+
+    public void setRa(String ra) {
+        this.ra = ra;
     }
 }
